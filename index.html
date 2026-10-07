@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quiz da Camada 6</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../QUIZ-Camada-6-OSI-main/assets/favicon.svg"
+    />
+    <meta name="theme-color" content="#060b14" />
+    <link
+      rel="stylesheet"
+      href="css/style.css"
+      onerror="this.onerror=null; this.href='style.css';"
+    />
+  </head>
+  <body>
+    <div class="bg" aria-hidden="true">
+      <div class="light-rays">
+        <span class="light-ray ray-cyan"></span>
+        <span class="light-ray ray-blue"></span>
+        <span class="light-ray ray-mint"></span>
+      </div>
+    </div>
+    <canvas id="net" aria-hidden="true"></canvas>
+    <section id="tv" hidden>
+      <header class="tvhead">
+        <div>
+          <h1>QUIZ — CAMADA 6 OSI</h1>
+          <p>SENAI • Manufatura Digital</p>
+        </div>
+        <p class="tvcount" id="tv-count"></p>
+        <button
+          type="button"
+          class="tv-exit"
+          id="tv-exit"
+          aria-label="Fechar modo TV"
+        >
+          ×
+        </button>
+      </header>
+      <p class="tvempty" id="tv-empty">
+        Aguardando os primeiros participantes…
+      </p>
+      <div class="tvpod" id="tv-pod"></div>
+      <ol class="tvlist" id="tv-list"></ol>
+      <div id="tv-alert" aria-live="polite" role="status"></div>
+      <button
+        type="button"
+        class="tvsnd"
+        id="tv-snd"
+        aria-label="Ligar ou desligar o som (tecla M)"
+        aria-pressed="true"
+        title="Ligar ou desligar o som"
+      >
+        🔊
+      </button>
+      <p class="tvhint" id="tv-hint">
+        Clique na tela para tela cheia e liberar o som
+      </p>
+    </section>
+
+    <main class="wrap" id="top">
+      <header>
+        <p class="eyebrow">Camada 6 · Apresentação</p>
+        <h1>Quiz da <span>Camada 6</span></h1>
+        <p class="lead">
+          Um desafio sobre tradução, compressão, criptografia e formatos de
+          dados.
+        </p>
+        <nav class="nav" aria-label="Escolha seu papel">
+          <div class="role-tabs" role="group" aria-label="Modo de acesso">
+            <button
+              class="btn"
+              id="tab-aluno"
+              type="button"
+              aria-pressed="true"
+            >
+              Sou aluno
+            </button>
+            <button
+              class="btn"
+              id="tab-prof"
+              type="button"
+              aria-pressed="false"
+            >
+              Sou o professor
+            </button>
+          </div>
+          <button
+            class="btn sound-toggle"
+            id="snd"
+            type="button"
+            aria-pressed="true"
+          >
+            Som: ligado
+          </button>
+        </nav>
+      </header>
+
+      <section id="aluno" aria-label="Quiz do aluno">
+        <div class="card" id="quiz-card"></div>
+      </section>
+
+      <section id="prof" aria-label="Painel do professor" hidden>
+        <div class="card teacher-access" id="teacher-access">
+          <h2>Acesso do professor</h2>
+          <p class="sub">
+            Informe o ID do professor para abrir o painel e o ranking.
+          </p>
+          <form id="teacher-login">
+            <label class="lbl" for="teacher-id">ID do professor</label>
+            <div class="teacher-id-field">
+              <input
+                class="field"
+                id="teacher-id"
+                type="password"
+                inputmode="numeric"
+                autocomplete="off"
+                required
+              />
+              <button
+                class="teacher-id-toggle"
+                id="teacher-id-toggle"
+                type="button"
+                aria-label="Mostrar ID"
+                aria-pressed="false"
+                aria-controls="teacher-id"
+                title="Mostrar ID"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="22"
+                  height="22"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z" />
+                  <circle cx="12" cy="12" r="3" />
+                  <path
+                    class="eye-slash"
+                    d="M4 4 20 20"
+                    style="display: none"
+                  />
+                </svg>
+              </button>
+            </div>
+            <p class="status" id="teacher-status" aria-live="polite"></p>
+            <div class="row">
+              <button class="btn primary" type="submit">Acessar painel</button>
+            </div>
+          </form>
+        </div>
+        <div class="stack-gap" id="teacher-content" hidden>
+          <div class="card" id="p-import">
+            <h2>Painel do professor</h2>
+            <p class="sub">
+              Cole os códigos enviados pelos alunos. Eles aparecem no ranking
+              após a leitura e ficam salvos neste navegador.
+            </p>
+            <label class="lbl" for="codes">Códigos dos alunos</label>
+            <textarea class="field" id="codes" placeholder="OSI6B-…"></textarea>
+            <div class="row">
+              <button class="btn primary" id="p-read" type="button">
+                Ler códigos
+              </button>
+              <button class="btn" id="p-tv" type="button">
+                📺 Abrir modo TV (nova guia)
+              </button>
+              <button class="btn" id="p-csv" type="button">
+                📤 Exportar CSV (Excel)
+              </button>
+              <button class="btn" id="p-copy" type="button">
+                Copiar tabela para planilha
+              </button>
+            </div>
+            <p class="status" id="p-status" aria-live="polite"></p>
+            <textarea
+              class="field"
+              id="tsv"
+              readonly
+              hidden
+              aria-label="Tabela para copiar"
+            ></textarea>
+          </div>
+          <div class="card" id="p-podcard" hidden>
+            <h2>Ranking</h2>
+            <p class="sub" id="p-summary"></p>
+            <div class="toolbar" id="p-tools">
+              <label class="chk"
+                ><input type="checkbox" id="sel-all" /> Selecionar todos</label
+              >
+              <button class="btn danger" id="p-del-sel" type="button" disabled>
+                Remover selecionados
+              </button>
+              <button class="btn danger" id="p-del-all" type="button">
+                Remover todos
+              </button>
+            </div>
+            <p class="status" id="p-rstatus" aria-live="polite"></p>
+            <div class="podium" id="podium"></div>
+            <div class="tablewrap">
+              <table class="grid" id="p-table"></table>
+            </div>
+            <p class="fineprint">
+              Ordem: mais acertos primeiro; em empate, quem respondeu mais
+              rápido. ✓ acertou. ✗ errou, seguido da letra marcada. Para
+              remover, marque as caixas e use “Remover selecionados”, ou use
+              “Remover” na linha do aluno. Cada remoção pede uma segunda
+              confirmação.
+            </p>
+          </div>
+          <div class="card" id="p-profile" hidden></div>
+          <div class="card" id="p-stats" hidden>
+            <h2>Estatísticas da turma</h2>
+            <div id="p-stats-body"></div>
+          </div>
+          <div class="card" id="p-qcard" hidden>
+            <h2>Acertos por questão</h2>
+            <p class="sub">
+              As barras vermelhas mostram as questões em que menos da metade da
+              turma acertou. Vale retomá-las na aula.
+            </p>
+            <ul class="qlist" id="p-qlist"></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script>
+      (function () {
+        function loadScript(paths, onload) {
+          var index = 0;
+
+          function attempt() {
+            var script = document.createElement("script");
+            script.src = paths[index];
+            script.onload = onload || null;
+            script.onerror = function () {
+              script.remove();
+              index += 1;
+
+              if (index < paths.length) {
+                attempt();
+                return;
+              }
+
+              console.error("Não foi possível carregar: " + paths.join(" ou "));
+              var message = document.createElement("p");
+              message.textContent =
+                "Não foi possível carregar os arquivos JavaScript do quiz.";
+              message.setAttribute("role", "alert");
+              document.body.prepend(message);
+            };
+            document.body.appendChild(script);
+          }
+
+          attempt();
+        }
+
+        loadScript(["js/data.js", "data.js"], function () {
+          loadScript(["js/app.js", "app.js"]);
+        });
+      })();
+    </script>
+  </body>
+</html>

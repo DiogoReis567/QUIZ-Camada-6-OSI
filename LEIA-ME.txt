@@ -1,0 +1,34 @@
+Quiz da Camada 6 (Apresentacao) - modelo OSI
+Abra o index.html no navegador. Nao precisa de servidor.
+Fontes vem do Google Fonts; sem internet usa fontes do sistema.
+
+Som de acerto e erro (botao "Som" no topo, ligado por padrao).
+Professor pode remover alunos (um, varios marcados, ou todos).
+Aluno: digita o nome, responde as 12 perguntas (ordem sorteada a cada tentativa; alternativas embaralhadas) e copia o codigo de resultado.
+Professor: aba "Sou o professor", informa o ID de acesso, cola os codigos, ve ranking, tempo e acertos por questao.
+O ID e verificado no JavaScript do navegador; nao use como protecao de dados confidenciais, pois pode ser visto nos arquivos do projeto.
+
+index.html     estrutura
+css/style.css (ou style.css na raiz)  visual
+js/data.js (ou data.js na raiz)      perguntas, nivel (d: 1 facil, 2 medio, 3 dificil) e alternativas A-E (edite aqui para mudar o quiz)
+js/app.js (ou app.js na raiz)        logica
+assets/        pasta reservada
+
+Os arquivos CSS e JavaScript podem ficar nas pastas css/ e js/ ou junto do index.html.
+
+NOVIDADES: pontos por dificuldade (10/20/30) + bonus de sequencia (3 seguidas +15, 5 seguidas +30);
+alternativas embaralhadas; conquistas; estatisticas da turma, questao mais dificil, desempenho por dificuldade;
+perfil individual (clique no nome do aluno); exportar CSV; modo TV em nova guia (professor > "Abrir modo TV"),
+atualiza sozinho quando voce le novos codigos no notebook (use o mesmo navegador). Na TV: clique ou tecle F para tela cheia.
+
+ATUALIZACAO (v5)
+- Sons: acerto, erro, novo participante, entrou/saiu do podio, novo lider. Libera no primeiro clique. Vibra no celular.
+- Teclado: no quiz, tecle 1-5 ou A-E para responder. Nos campos de texto voce digita normalmente.
+- Modo TV: abre em NOVA ABA (reaproveita a mesma aba). Atualiza sozinha ao ler novos codigos (mesmo navegador).
+  Animacoes: novo participante, entrou no podio, saiu do podio, subiu/desceu (setas verdes/vermelhas), novo lider + confete.
+  Teclas na TV: F tela cheia, M liga/desliga som. Clique uma vez na TV para liberar o som.
+- Layout ajustado para celular, tablet, notebook, desktop e TV (4K).
+- Para outra tela/TV fisica: espelhe/projete a aba do modo TV (os dados ficam no navegador do professor).
+
+
+ID para usar na área do professor: 55786123 
